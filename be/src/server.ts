@@ -10,9 +10,14 @@ import passport from "passport";
 import "@lib/auth_passport/facebook";
 import "@lib/auth_passport/gmail";
 import wishlistRouter from "routes/wishlist.router";
-import { WebSocketServer, WebSocket } from "ws";
 import http from "http";
+import express from "express";
 import { initWS } from "config/websocket.config";
+import paymentRouter from "routes/payment.router";
+import cartRouter from "routes/cart.router";
+import orderRouter from "routes/order.router";
+import productRouter from "routes/product.router";
+import profileRouter from "routes/profile.router";
 
 dotenv.config();
 
@@ -36,12 +41,16 @@ databaseConfig.connectDB().then(() => {
   // mounting secure route middleware
   app.use(routeValidation);
 
-  app.get("/", (req, res) => res.send("The Fashion App Backend is running!"));
-
   // mounting routes
+  app.get("/", (req, res) => res.send("The Fashion App Backend is running!"));
   app.use("/api/v1/auth", authRouter);
   app.use("/api/v1", otpRouter);
+  app.use("/api/v1/profile", profileRouter);
   app.use("/api/v1/wishlist", wishlistRouter);
+  app.use("/api/v1", productRouter);
+  app.use("/api/v1", cartRouter);
+  app.use("/api/v1", orderRouter);
+  app.use("/api/v1", paymentRouter);
 
   server.listen(Number(process.env.PORT) || 3000, () =>
     console.log(`Server is running on port ${Number(process.env.PORT) || 3000}`)

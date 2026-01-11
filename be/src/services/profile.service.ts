@@ -1,6 +1,7 @@
 import { IUser } from "@models/user";
+import { ObjectId } from "mongoose";
 
 export interface ProfileService {
-  update(user: IUser): Promise<IUser | any>;
-  delete(id: string): Promise<void>;
+  update(id: ObjectId, user: IUser): Promise<IUser | any>;
+  delete(id: ObjectId): Promise<void>;
 }

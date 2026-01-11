@@ -9,17 +9,17 @@ class ProfileServiceImpl implements ProfileService {
     this.model = userModel.getModel();
   }
 
-  async update(user: IUser): Promise<IUser | any> {
-    return this.model.findByIdAndUpdate(
+  async update(id: any, user: IUser): Promise<IUser | any> {
+    return await this.model.findByIdAndUpdate(
       {
-        _id: user._id,
+        _id: id,
       },
       user
     );
   }
 
-  async delete(id: string): Promise<void> {
-    this.model.findOneAndUpdate({ _id: id }, { deleted: true });
+  async delete(id: any): Promise<void> {
+    await this.model.findOneAndUpdate({ _id: id }, { deleted: true });
   }
 }
 

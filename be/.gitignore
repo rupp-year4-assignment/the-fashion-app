@@ -2,7 +2,7 @@
 /node_modules/
 
 # Build output - NOT ignored for Vercel deployment
-# /dist/
+/dist/
 
 # Environment variables
 .env

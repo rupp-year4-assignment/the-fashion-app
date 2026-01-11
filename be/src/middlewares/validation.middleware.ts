@@ -83,6 +83,7 @@ const validationMiddleware = {
       .isString()
       .withMessage("Verification code must be a string"),
   ],
+  // wishlist validation
   addWishlists: [
     body("productId")
       .trim()
@@ -104,6 +105,29 @@ const validationMiddleware = {
       .withMessage("productId is required")
       .isMongoId()
       .withMessage("Invalid productId"),
+  ],
+  // profile validation
+  updateProfile: [
+    body("firstName")
+      .optional()
+      .trim()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("First name must be between 2 and 50 characters"),
+    body("lastName")
+      .optional()
+      .trim()
+      .isLength({ min: 2, max: 50 })
+      .withMessage("Last name must be between 2 and 50 characters"),
+    body("email")
+      .optional()
+      .trim()
+      .isEmail()
+      .withMessage("Invalid email address")
+      .normalizeEmail(),
+    body("gender")
+      .optional()
+      .isIn(["male", "female", "not_specified"])
+      .withMessage("Gender must be male, female, or not_specified"),
   ],
 };
 
