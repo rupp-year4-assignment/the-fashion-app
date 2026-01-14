@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/app/app_theme.dart';
+import 'package:mobile/app/app_router.dart';
+import 'package:sizer/sizer.dart';
 
 class TheFashionApp extends StatelessWidget {
   const TheFashionApp._internal();
@@ -9,6 +12,13 @@ class TheFashionApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return Sizer(
+      builder: (context, orientation, screenType) {
+        return MaterialApp.router(
+          theme: AppTheme.lightTheme,
+          routerConfig: AppRouter.router,
+        );
+      },
+    );
   }
 }
