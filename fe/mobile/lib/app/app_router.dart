@@ -5,6 +5,7 @@ import 'package:mobile/app/features/authentication/presentation/view/reset_passw
 import 'package:mobile/app/features/authentication/presentation/view/send_otp_screen.dart';
 import 'package:mobile/app/features/authentication/presentation/view/signup_screen.dart';
 import 'package:mobile/app/features/boarding/presentation/view/boarding_screen.dart';
+import 'package:mobile/app/features/home/presentation/view/home_screen.dart';
 import 'package:mobile/app/features/splash/presentation/view/splash_screen.dart';
 import 'package:mobile/app/features/not-found/presentation/view/not_found_page.dart';
 
@@ -20,7 +21,7 @@ class AppRouter {
   static const String otp = '/auth/otp';
 
   static final GoRouter router = GoRouter(
-    initialLocation: resetPassword,
+    initialLocation: home,
     routes: [
       GoRoute(
         path: resetPassword,
@@ -64,6 +65,11 @@ class AppRouter {
         name: "splash",
         path: splash,
         builder: (context, state) => const SplashScreen(),
+      ),
+      GoRoute(
+        path: home,
+        name: "home",
+        builder: (context, state) => const HomeScreen(),
       ),
     ],
     errorBuilder: (context, state) => const NotFoundPage(),

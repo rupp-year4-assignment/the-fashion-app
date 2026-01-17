@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile/app/features/authentication/presentation/widgets/input_field_widget.dart';
+import 'package:mobile/core/widgets/input_field_widget.dart';
 import 'package:mobile/core/resource/asset_manager.dart';
 import 'package:mobile/core/resource/color.dart';
 import 'package:mobile/core/resource/spacing.dart';

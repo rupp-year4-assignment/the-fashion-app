@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/core/resource/color.dart';
 import 'package:mobile/core/resource/radius.dart';
 
 class InputFieldWidget extends StatefulWidget {
   final String hintText;
-  final String label;
+  final String? label;
   final String? Function(String?)? validator;
   final bool isObscuredText;
   final TextEditingController controller;
   final void Function(bool)? onErrorChanged;
   final Widget? suffixIcon;
+  final Widget? prefixIcon;
 
   InputFieldWidget({
     super.key,
     this.hintText = 'hint text',
     this.isObscuredText = false,
-    this.label = 'Label',
+    this.label,
     TextEditingController? controller,
     this.validator,
     this.onErrorChanged,
+    this.prefixIcon,
     this.suffixIcon,
   }) : controller = controller ?? TextEditingController();
 
@@ -63,7 +66,8 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
       crossAxisAlignment: .start,
       spacing: 10,
       children: [
-        Text(widget.label, style: Theme.of(context).textTheme.labelMedium),
+        if (widget.label != null)
+          Text(widget.label!, style: Theme.of(context).textTheme.labelMedium),
         TextFormField(
           controller: widget.controller,
           obscureText: isVisible,
@@ -72,7 +76,8 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
 
           autovalidateMode: .onUnfocus,
           decoration: InputDecoration(
-            contentPadding: .symmetric(horizontal: 10, vertical: 15),
+            prefixIcon: widget.prefixIcon,
+            contentPadding: .symmetric(horizontal: 5, vertical: 15),
             hintText: widget.hintText,
             hintStyle: Theme.of(
               context,
@@ -100,7 +105,9 @@ class _InputFieldWidgetState extends State<InputFieldWidget> {
               borderRadius: .circular(AppRadius.defaultRadius),
             ),
             border: OutlineInputBorder(
-              borderSide: .none,
+              borderSide: BorderSide(
+                color: ColorManager.lightSecondaryButtonColor,
+              ),
               borderRadius: .circular(AppRadius.defaultRadius),
             ),
           ),
