@@ -95,7 +95,6 @@ class _AuthPageState extends State<AuthPage> {
       _showSuccessDialog("Password Reset Successful!", "Your password has been updated. You can now log in with your new credentials.");
     }
   }
-
   void _showSuccessDialog(String title, String message) {
     showDialog(
       context: context,
@@ -550,7 +549,6 @@ class _LegalDisclaimer extends StatelessWidget {
       ),
     );
   }
-
   TextSpan _linkSpan(String text) {
     return TextSpan(
       text: text,
