@@ -45,3 +45,5 @@ app.*.map.json
 /android/app/release
 mcp.json
 .env
+.env.*
+!.env.example
