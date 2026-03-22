@@ -12,6 +12,7 @@ export interface IOrder extends Document {
     price: number;
     quantity: number;
     productName: string;
+    image?: string;
   }[];
   totalAmount: number;
   orderStatus: "pending" | "shipped" | "delivered" | "cancelled";
@@ -25,7 +26,23 @@ export interface IOrder extends Document {
       country: string;
       location: LocationMetaData;
     };
-    dekiveryStatus: "preparing" | "in_transit" | "delivered";
+    pickupAddress: {
+      street: string;
+      city: string;
+      state: string;
+      postalCode: string;
+      country: string;
+      location: LocationMetaData;
+    };
+    destinationAddress: {
+      street: string;
+      city: string;
+      state: string;
+      postalCode: string;
+      country: string;
+      location: LocationMetaData;
+    };
+    deliveryStatus: "preparing" | "in_transit" | "delivered";
     trackingNumber: string;
     courier: string;
   };
@@ -56,6 +73,7 @@ class OrderModel {
               price: { type: Number, required: true },
               quantity: { type: Number, required: true },
               productName: { type: String, required: true },
+              image: { type: String, required: false },
             },
           ],
           totalAmount: { type: Number, required: true },
@@ -88,7 +106,43 @@ class OrderModel {
                 },
               },
             },
-            dekiveryStatus: {
+            pickupAddress: {
+              street: { type: String, required: true },
+              city: { type: String, required: true },
+              state: { type: String, required: true },
+              postalCode: { type: String, required: true },
+              country: { type: String, required: true },
+              location: {
+                type: {
+                  type: String,
+                  enum: ["Point"],
+                  required: true,
+                },
+                coordinates: {
+                  type: [Number],
+                  required: true,
+                },
+              },
+            },
+            destinationAddress: {
+              street: { type: String, required: true },
+              city: { type: String, required: true },
+              state: { type: String, required: true },
+              postalCode: { type: String, required: true },
+              country: { type: String, required: true },
+              location: {
+                type: {
+                  type: String,
+                  enum: ["Point"],
+                  required: true,
+                },
+                coordinates: {
+                  type: [Number],
+                  required: true,
+                },
+              },
+            },
+            deliveryStatus: {
               type: String,
               enum: ["preparing", "in_transit", "delivered"],
               required: true,

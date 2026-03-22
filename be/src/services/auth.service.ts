@@ -1,9 +1,12 @@
-import { HttpContext } from "../types/httpContext";
+import { loginRequest } from "@dtos/request/login.request";
+import { registerRequest } from "@dtos/request/register.request";
 
-export default interface AuthService {
-  login(httpContext: HttpContext): Promise<void>;
-  register(httpContext: HttpContext): Promise<void>;
-  logout(httpContext: HttpContext): Promise<void>;
-  continueWithGoogle(httpContext: HttpContext): Promise<void>;
-  continueWithFacebook(httpContext: HttpContext): Promise<void>;
+export interface IAuthService {
+  login(credential: loginRequest): Promise<any>;
+  register(credential: registerRequest): Promise<any | string>;
+  logout(refreshToken: string): Promise<void>;
+  refreshToken(refreshToken: string): Promise<any>;
+
+  continueWithGoogle(credential: any): Promise<any>;
+  continueWithFacebook(credential: any): Promise<any>;
 }

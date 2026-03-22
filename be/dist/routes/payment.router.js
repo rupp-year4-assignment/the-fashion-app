@@ -1,0 +1,22 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const payment_controller_1 = __importDefault(require("../controllers/payment.controller"));
+const hasRoles_middleware_1 = require("../middlewares/hasRoles.middleware");
+const route = (0, express_1.Router)();
+route.post("/payment", payment_controller_1.default.createPayment);
+route.post("/payments/create-checkout-session", payment_controller_1.default.createStripeCheckoutSession);
+route.get("/payment/order/:orderId", payment_controller_1.default.getPaymentByOrderId);
+route.get("/payment/:paymentId", (0, hasRoles_middleware_1.hasRoles)("admin"), payment_controller_1.default.getPaymentById);
+route.get("/payment", (0, hasRoles_middleware_1.hasRoles)("admin"), payment_controller_1.default.getAllPayments);
+route.patch("/payment/:paymentId/status", (0, hasRoles_middleware_1.hasRoles)("admin"), payment_controller_1.default.updatePaymentStatus);
+route.post("/payment/:paymentId/complete", payment_controller_1.default.completePayment);
+route.post("/payment/:paymentId/fail", payment_controller_1.default.failPayment);
+route.post("/payment/:paymentId/expire", payment_controller_1.default.expirePayment);
+route.post("/payment/generate-khqr", payment_controller_1.default.generateKHQR);
+route.post("/payment/verify", payment_controller_1.default.verifyPayment);
+route.post("/payment/check-expired", payment_controller_1.default.checkExpiredPayments);
+exports.default = route;

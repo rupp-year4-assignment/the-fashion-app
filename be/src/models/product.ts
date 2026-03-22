@@ -1,6 +1,6 @@
 import { ProductVariant } from "@ctypes/product_variant";
 import mongoose, { Schema, Document, Model } from "mongoose";
-import { v4 as uuidv4 } from "uuid";
+import crypto from "crypto";
 
 export interface IProduct extends Document {
   productId: string;
@@ -10,6 +10,7 @@ export interface IProduct extends Document {
   category: string;
   status: "available" | "out_of_stock";
   variants: ProductVariant[];
+  images: string[];
 }
 
 class ProductModel {
@@ -22,7 +23,7 @@ class ProductModel {
           type: String,
           required: true,
           unique: true,
-          default: () => uuidv4(),
+          default: () => crypto.randomUUID(),
         },
         name: { type: String, required: true },
         description: { type: String, required: true },
@@ -43,8 +44,9 @@ class ProductModel {
             stock: { type: Number, default: 0 },
           },
         ],
+        images: { type: [String], default: [] },
       },
-      { timestamps: true }
+      { timestamps: true },
     );
 
     this.model = mongoose.model<IProduct>("products", productSchema);

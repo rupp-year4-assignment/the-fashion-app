@@ -1,8 +1,8 @@
 # Node.js dependencies
 /node_modules/
 
-# Build output
-/dist/
+# Build output - NOT ignored for Vercel deployment
+# /dist/
 
 # Environment variables
 .env

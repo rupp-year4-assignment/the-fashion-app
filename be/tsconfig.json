@@ -13,7 +13,12 @@
       "@models/*": ["models/*"],
       "@controllers/*": ["controllers/*"],
       "@services/*": ["services/*"],
-      "@ctypes/*": ["types/*"]
+      "@ctypes/*": ["types/*"],
+      "@dtos/*": ["dtos/*"],
+      "@exceptions/*": ["exceptions/*"],
+      "@middlewares/*": ["middlewares/*"],
+      "@lib/*": ["lib/*"],
+      "@mapper/*": ["mapper/*"]
     }
   },
   "include": ["src"]

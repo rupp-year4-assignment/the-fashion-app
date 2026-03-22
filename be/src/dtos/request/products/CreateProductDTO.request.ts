@@ -7,4 +7,5 @@ export interface createProductDTO {
   category: string;
   status: "available" | "out_of_stock";
   variants: ProductVariant[];
+  images?: string[];
 }

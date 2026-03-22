@@ -1,14 +1,17 @@
 services:
-  db:
-    image: mongo:8.2.2
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: superuser
-      MONGO_INITDB_ROOT_PASSWORD: superuser
-      MONGO_INITDB_DATABASE: theFashionAppDB
+  redis:
+    image: redis:7
+    container_name: fashion-app-redis
+    restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "6379:6379"
     volumes:
-      - mongo-data:/data/db
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
 
 volumes:
-  mongo-data:
+  redis-data:
